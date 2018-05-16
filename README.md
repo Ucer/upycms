@@ -12,14 +12,12 @@ upycms 是用 Yii2.0 框架开发的一套 「后台管理系统」。其含义�
 初始的目录结构如下：
 ```
 www  WEB部署目录（或者子目录）
-├─application           应用目录
-│  ├─common             公共模块目录（可以更改）
-│  ├─module_name        模块目录
-│  │  ├─common.php      模块函数文件
-│  │  ├─controller      控制器目录
-│  │  ├─model           模型目录
-│  │  ├─view            视图目录
-│  │  └─ ...            更多类库目录
+├─app                   应用目录
+│  ├─config             应用配置文件
+│  │  ├─components.php  组件配置
+│  │  ├─db.php          数据库配置
+│  │  ├─params          params 配置
+│  │  ├─urls            路由配置文件
 ```
 
 ## 功能如下

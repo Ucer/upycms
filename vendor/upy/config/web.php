@@ -19,6 +19,31 @@ $db = require($dbFile);
 $params = require __DIR__ . '/params.php';
 $urls = require(__DIR__ . '/urls.php');
 $components = require(__DIR__ . '/components.php');
+$upyModules = require(__DIR__ . '/modules.php');
+
+$twigFunctions = [];
+$modulePathList = [];
+
+foreach($upyModules as $module=>$attr){
+    $modules[$module] = [
+        'class' => $attr['class']
+    ];
+
+    $modPath = $attr['path'];
+    array_push($modulePathList, $modPath);
+    $moduleWebConfig = $modPath. '/config/web.php';
+    if (is_file($moduleWebConfig)){
+        $components = array_merge($components, require($moduleWebConfig) );
+    }
+
+    $funcClass = $attr['namespace'] . '\service\FunctionService';
+    $funcList = get_class_methods($funcClass);
+    if (is_array($funcList)){
+        foreach ($funcList as $fc){
+            $twigFunctions['UPY_' . strtoupper($module) . '_' . $fc] = $funcClass . '::' . $fc;
+        }
+    }
+}
 
 
 $components['db'] = $db;
@@ -27,18 +52,24 @@ $components['urlManager'] = [
     'enablePrettyUrl' => true,
     'rules' => $urls,
 ];
+$components['view']['renderers']['html']['functions'] = $twigFunctions;
 
 $config = [
     'id' => 'basic',
     'basePath' => $proRoot,
     'bootstrap' => ['log'],
+//    'controllerNamespace' => 'src\controllers',
+    'defaultRoute' => 'Web',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
         '@upy' => '@proRoot/vendor/upy/core',
     ],
     'components' => $components,
-    'params' => $params
+    'modules' => $modules,
+    'params' => $params,
+    'language' => 'zh-CN',
+    'timeZone'=>'Asia/Chongqing',
 ];
 
 

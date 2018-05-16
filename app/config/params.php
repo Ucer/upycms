@@ -6,4 +6,5 @@
  * @copyright (c) 2018, jiayouhaoshi.com
  */
 
-return [];
+return [
+];
