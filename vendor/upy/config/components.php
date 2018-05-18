@@ -20,7 +20,37 @@ $baseComponents = [
     'cache' => [
         'class' => 'yii\caching\FileCache',
     ],
-
+    'view' => [
+//        'class' => 'yii\web\View',
+        'theme' => [
+            'basePath' => '@proRoot/themes',
+//            'baseUrl' => '@web/themes',
+            'pathMap' => [
+//                '@app/views' => '@proRoot/themes',
+            ],
+        ],
+        'renderers' => [
+            'tpl' => [
+                'class' => 'yii\smarty\ViewRenderer',
+                //'cachePath' => '@runtime/Smarty/cache',
+            ],
+            'html' => [
+                'class' => 'yii\twig\ViewRenderer',
+                'cachePath' => '@runtime/twig/cache',
+                // Array of twig options:
+                'options' => [
+                    'auto_reload' => true,
+                    'debug' => true
+                ],
+                'globals' => [
+                    'html' => '\yii\helpers\Html',
+                    'url'  => '\yii\helpers\Url',
+                ],
+                'functions' => [],
+//                'uses' => ['yii\bootstrap'],
+            ],
+        ],
+    ],
     'errorHandler' => [
         'errorAction' => 'site/error',
     ],

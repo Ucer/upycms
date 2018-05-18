@@ -62,8 +62,8 @@ $config = [
     'controllerNamespace' => 'src\controllers',
     'defaultRoute' => 'Web',
     'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm' => '@vendor/npm-asset',
+//        '@bower' => '@vendor/bower-asset',
+//        '@npm' => '@vendor/npm-asset',
         '@upy' => '@proRoot/vendor/upy/core',
     ],
     'components' => $components,
