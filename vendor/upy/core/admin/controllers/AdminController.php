@@ -2,18 +2,11 @@
 
 namespace upy\admin\controllers;
 
-use yii\base\Controller;
 
-class AdminController extends Controller
+class AdminController extends AdminBaseController
 {
-    public function __construct($id, $module, $config = [])
-    {
-        dd('construct');
-//        parent::__construct($id, $module, $config);
-//        $this->request = Yii::$app->request;
-    }
 
-    public function adctionIdex()
+    public function actionIndex()
     {
         dd('admin');
 

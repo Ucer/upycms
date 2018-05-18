@@ -1,14 +1,16 @@
 <?php
+namespace  upy\admin\models;
+
+use yii\db\ActiveRecord;
 
 /**
- * admin模块 - 后台URL路由配置
+ *
  * @author Ucer - Hong Jie Zhang <ucer183@163.com>
  * @copyright (c) 2018, jiayouhaoshi.com
  *
  */
 
+class  BaseModel extends ActiveRecord
+{
 
-return [
-    /*后台*/
-
-];
+}

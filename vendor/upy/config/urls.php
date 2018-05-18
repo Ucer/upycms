@@ -25,9 +25,10 @@ $baseUrls = [
 
 $adminUrls = [
     'admin/?' => 'admin/admin/index',
+    'site/error' => 'admin/admin/index',
     // 'admin/account/?' => 'admin/admin/account',
 //    'admin/captcha/?' => 'admin/web/captcha',
-//    'admin/login/?' => 'admin/web/login',
+    'admin/login/?' => 'admin/web/login',
 //    'admin/logout/?' => 'admin/admin/logout',
 //    'admin/init/?' => 'admin/admin/init',
 //    // 'admin/update/?' => 'admin/admin/update',
