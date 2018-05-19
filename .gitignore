@@ -16,6 +16,8 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 
-node_modules
-
 /config/db.php
+
+node_modules/
+/web/static/dist
+
