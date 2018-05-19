@@ -16,7 +16,12 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 
-node_modules
-web/static/dist
-
 /config/db.php
+
+node_modules/
+/web/static/dist
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
