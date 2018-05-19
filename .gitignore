@@ -17,5 +17,6 @@ tests/_support/_generated
 /.vagrant
 
 node_modules
+web/static/dist
 
 /config/db.php
