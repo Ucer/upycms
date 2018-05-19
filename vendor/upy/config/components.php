@@ -14,8 +14,8 @@ $appComponents = require($componentConfigFile);
 
 $baseComponents = [
     'request' => [
-        // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
         'cookieValidationKey' => 'upycms',
+        'csrfParam' => '_token',
     ],
     'cache' => [
         'class' => 'yii\caching\FileCache',

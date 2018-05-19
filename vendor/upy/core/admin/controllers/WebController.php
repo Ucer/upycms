@@ -11,6 +11,7 @@ namespace upy\admin\controllers;
 
 
 use upy\base\controllers\BaseController;
+use yii\captcha\CaptchaAction;
 use Yii;
 
 class WebController extends BaseController
@@ -28,6 +29,11 @@ class WebController extends BaseController
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'backColor' => 0XEEEEEE,
+                'maxLength' => 3,
+                'minLength' => 3,
+                'height' => 46,
+                'offset' =>4
             ],
         ];
     }
