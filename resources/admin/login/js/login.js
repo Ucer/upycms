@@ -45,15 +45,16 @@ jQuery(document).ready(function() {
 
             btn.text('正在登录...').attr('disabled', true);
             $.post(loginForm.attr('action'), loginForm.serialize(), function(resp){
-                if (resp.code == 200){
+                if (resp.status === true){
                     btn.text('登录成功,正在跳转...');
-                    window.location.href = resp.data.url;
+                    // window.location.href = resp.data.url;
                 }else{
                     $('.refresh-captcha-btn').click();
-                    formTip.text(resp.msg).addClass('form-errortip');
+                    formTip.text(resp.message).addClass('form-errortip');
                     btn.text(btnText).attr('disabled', false);
                 }
             }, 'json').error(function(){
+                console.log('bb');
                 $('.captcha-data').click();
                 formTip.text(formTipText).addClass('form-errortip');
                 btn.text(btnText).attr('disabled', false);

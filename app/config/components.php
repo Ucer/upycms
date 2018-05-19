@@ -7,4 +7,6 @@
  *
  */
 
-return [];
+return [
+    'charset'=>'utf8'
+];
