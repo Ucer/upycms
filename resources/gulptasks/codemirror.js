@@ -88,3 +88,17 @@ gulp.task('compress-codemirror', function() {
     gulp.start('compress-codemirror-addon');
 });  
 
+//说明
+gulp.task('help',function () {
+  	console.log('	gulp minifyCSS			    CSS打包');
+    console.log('	gulp minifyLIB			    LIB打包');
+    console.log('	gulp minifyAdminJS			Admin-JS打包');
+  	console.log('	gulp minifyManageJS			Manage-JS打包');
+    console.log('	gulp build			        文件打包');
+    console.log('	gulp help			          参数说明');
+});
+
+/* 默认 */
+gulp.task('default',function () {
+    gulp.start('help');
+});

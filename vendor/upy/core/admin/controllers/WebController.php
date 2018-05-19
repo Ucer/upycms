@@ -16,6 +16,9 @@ use Yii;
 class WebController extends BaseController
 {
 
+    /**
+     * {@inheritdoc}
+     */
     public function actions()
     {
         return [
@@ -25,20 +28,20 @@ class WebController extends BaseController
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-                'backColor' => 0XEEEEEE,
-                'maxLength' => 4,
-                'minLength' => 4,
-                'height' => 46,
             ],
         ];
     }
+
+
 
     public function actionLogin()
     {
         $tpl = '/login.html';
         $data = [
+            'csrftoken' => Yii::$app->request->csrfToken,
+            'nextUrl'=>'',
             'name' => 'upy',
-            'errorInfo' => ''
+            'errorInfo'=>''
         ];
         return $this->render($tpl, $data);
     }
