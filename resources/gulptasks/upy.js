@@ -58,10 +58,10 @@ gulp.task('compress-upy-step7', function() {
 });
 
 gulp.task('compress-upy-all',['compress-upy-step7'], function() {
-    // gulp.src(configAll.src.all)
-    //     .pipe(changed(config.name, {extension: 'js'}))
-    //     .pipe(concat(config.filename + '-all.min.js'))
-    //     .pipe(gulp.dest(destJs));
+    gulp.src(configAll.src.dist_all)// web/static/dist/upy/js/*js ===> web/static/dist/upy/js/*-all.min.js
+        .pipe(changed(config.name, {extension: 'js'}))
+        .pipe(concat(config.filename + '-all.min.js'))
+        .pipe(gulp.dest(destJs));
 });
 
 gulp.task('compress-upy-css', function () {

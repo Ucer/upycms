@@ -34,15 +34,15 @@ upyAllConf.src = {
         upyAllConf.dir + '/core/template/*/*.{html,tpl,tpl.html}',
         upyAllConf.dir + '/bench/template/*/*.{html,tpl,tpl.html}'
     ],
-    js: [
+    dist_js: [
         'dist/upy/js/upy-core.ctr.min.js',
         'dist/upy/js/upy-bench.ctr.min.js',
         'dist/upy/js/upy-conf.min.js',
     ],
-    all: [
-        'dist/upy/js/upy-all.ctr.min.js',
-        'dist/upy/js/upy-all.tpl.min.js',
-        'dist/upy/js/upy.conf.min.js',
+    dist_all: [
+        'web/static/dist/upy/js/upy-all.ctr.min.js',
+        'web/static/dist/upy/js/upy-all.tpl.min.js',
+        'web/static/dist/upy/js/upy.conf.min.js',
     ],
     css: [
         'libs/bootstrap-plugin/bootstrap-additions/0.3.1/bootstrap-additions.min.css',
