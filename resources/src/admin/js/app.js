@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('WPGCMS', [
+angular.module('UPYCMS', [
         'ui.router',
-        'wpg.all',
-        'wpg.config'
+        'upy.all',
+        'upy.config'
     ])
     .run(function($rootScope, $window, $location, $timeout, $state, $http, wpgPopup, wpgNotify) {
 
