@@ -6,13 +6,18 @@ var srcDir = 'src',
 var upyConf = {
     name: 'upy',
     filename: 'upy',
+    dir: 'resources/upy',
     src: {},
     dest: ''
 };
 upyConf.dest = destDir + '/' + upyConf.name;
 upyConf.src = {
     css: [],
-    img: []
+    img: [],
+    config: [
+        upyConf.dir + '/bench/config/*.js',
+        upyConf.dir + '/bench/*.js'
+    ],
 };
 
 
@@ -25,6 +30,15 @@ var upyAllConf = {
 upyAllConf.dir = 'resources/' + upyAllConf.name;
 upyAllConf.dest = destDir + '/' + upyAllConf.name;
 upyAllConf.src = {
+    tpl: [
+        upyAllConf.name + '/core/template/*/*.{html,tpl,tpl.html}',
+        upyAllConf.name + '/bench/template/*/*.{html,tpl,tpl.html}'
+    ],
+    all: [
+        'dist/upy/js/upy-all.ctr.min.js',
+        'dist/upy/js/upy-all.tpl.min.js',
+        'dist/upy/js/upy.conf.min.js',
+    ],
     css: [
         'libs/bootstrap-plugin/bootstrap-additions/0.3.1/bootstrap-additions.min.css',
         upyAllConf.name + '/css/*.css',
