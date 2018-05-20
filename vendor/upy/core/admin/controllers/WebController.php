@@ -11,6 +11,7 @@ namespace upy\admin\controllers;
 
 use upy\admin\models\AdminLog;
 use upy\admin\models\AdminLoginForm;
+use upy\admin\models\AdminUser;
 use upy\base\controllers\BaseController;
 use upy\setting\models\Setting;
 use yii\captcha\CaptchaAction;
@@ -44,6 +45,11 @@ class WebController extends BaseController
 
     public function actionLogin()
     {
+        $errorInfo = '';
+        if (!Yii::$app->admin->isGuest){
+            return $this->redirect(['/admin/']);
+        }
+
         $securitySetting = Setting::getData("security", [
             "admin_white_iplist" => []
         ]);
@@ -83,5 +89,16 @@ class WebController extends BaseController
             ];
             return $this->render($tpl, $data);
         }
+    }
+
+    // 生产环境要删除
+    public function actionTest()
+    {
+        $data = [
+            'username' => 'ucer',
+            'password' => '123456'
+        ];
+        $m = new AdminUser();
+        var_dump($m->saveData($data));
     }
 }

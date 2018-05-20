@@ -28,6 +28,7 @@ $adminUrls = [
     'site/error' => 'admin/admin/index',
     'admin/login/?' => 'admin/web/login',
     'admin/captcha/?' => 'admin/web/captcha',
+    'admin/test' => 'admin/web/test',
     // 'admin/account/?' => 'admin/admin/account',
 //    'admin/logout/?' => 'admin/admin/logout',
 //    'admin/init/?' => 'admin/admin/init',
