@@ -69,7 +69,7 @@ gulp.task('compress-admin-html', function () {
 
 
 gulp.task('compress-admin-login', function () {
-    gulp.src(['resources/admin/login/*/*.*', 'resources/admin/login/*/*/*.*'])
+    gulp.src(['resources/src/admin/login/*/*.*', 'resources/src/admin/login/*/*/*.*'])
         .pipe(gulp.dest(adminConfig.dest + '/login'));
 });
 

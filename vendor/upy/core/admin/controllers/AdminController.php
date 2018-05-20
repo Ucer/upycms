@@ -30,11 +30,11 @@ class AdminController extends AdminBaseController
 
     public function actionIndex()
     {
-        $distUrl = '/static/dist/admin/';
-        $jspath = '/static/dist/admin/js';
         if (YII_ENV === 'dev') {
             $debug = true;
+            $distUrl = '/static/dist/admin/';
             $proRoot = Yii::getAlias('@proRoot'). '/web';
+            $jspath = '/static/dist/admin/js';
             $this->scanDir($fileList, $proRoot . $jspath);
             $jsFileList = [];
             foreach ($fileList as $key=>$value){
@@ -42,6 +42,7 @@ class AdminController extends AdminBaseController
             }
         } else {
             $debug = false;
+            $distUrl = '/static/dist/admin/';
         }
 
         $siteUrl = Yii::$app->request->getHostInfo();

@@ -1,8 +1,0 @@
-<ul class="nav nav-tabs" ng-if="$app.formtype!=1 && $app.metacontrol" style="margin-bottom: 20px;">
-  <li ng-class="{'active': formActiveTab=='main'}"><a href="javascript:;" ng-click="js_change_formtab('main')">{{ $app.name }}内容</a></li>
-  <li ng-class="{'active': formActiveTab=='meta'}"><a href="javascript:;" ng-click="js_change_formtab('meta')">设置{{ $app.name }}</a></li>
-</ul>
-
-<div ng-include="templateUrl.maincontrol" ng-show="formActiveTab!='meta'"></div>
-
-<div ng-include="templateUrl.metacontrol" ng-show="formActiveTab=='meta'" ng-if="$app.formtype!=1 && $app.metacontrol"></div>

@@ -1,9 +1,0 @@
-<div class="form-group" ng-repeat="field in appData.fields track by field.id" on-finish-render>
-    <div class="control-label">
-        <label>{{ field.name }}:</label>
-    </div>
-    <div class="controls">
-        <div ng-include="templateUrl.fieldcontrol"></div>
-        <p class="help-block" ng-if="field.tip">{{ field.tip }}</p>
-    </div>
-</div>
