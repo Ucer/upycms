@@ -18,7 +18,6 @@ var ngmin = require('gulp-ngmin');
 var minifycss = require('gulp-clean-css');
 var stripDebug = require('gulp-strip-debug');
 var config = require('./config.js').upy;
-// var configAll = require('./config.js').upyall;
 
 var destJs = config.dest + '/js';
 var html2jsOptions = {
@@ -129,28 +128,37 @@ gulp.task('compress-upy-step5', function () {
 
 
 gulp.task('compress-upy-all', [
-    // 'compress-upy-step6',
+    'compress-upy-step6',
     'compress-upy-step7'
 ], function () {
-    // gulp.src(config.all_stp_two)
-    //     .pipe(changed(config.name, {extension: 'js'}))
-    //     .pipe(concat(config.filename + '-all.min.js'))
-    //     .pipe(gulp.dest(destJs));
+    gulp.src(config.src.all_stp_two)
+        .pipe(changed(config.name, {extension: 'js'}))
+        .pipe(concat(config.filename + '-all.min.js'))
+        .pipe(gulp.dest(destJs));
+});
+gulp.task('compress-upy-step6', [
+    'compress-upy-core',
+    'compress-upy-bench'
+], function() {
+    return gulp.src(config.src.all_stp_one)
+        .pipe(changed(config.name, {extension: 'js'}))
+        .pipe(concat(config.filename + '-all.ctr.min.js'))
+        .pipe(gulp.dest(destJs));
 });
 gulp.task('compress-upy-step7', function() {
-    return gulp.src(config.all_tpl)
+    return gulp.src(config.src.all_tpl)
         .pipe(changed(config.name + '-tpl', {extension: 'html'}))
         .pipe(htmlmin({
             collapseWhitespace: true
         }))
         .pipe(ngHtml2Js(html2jsOptions))
         .pipe(concat(config.filename + "-all.tpl.tmp.js"))
-        // .pipe(uglify({
-        //     mangle: true,//类型：Boolean 默认：true 是否修改变量名
-        //     compress: true,//类型：Boolean 默认：true 是否完全压缩
-        // }))
-        // .pipe(concat(config.filename + "-all.tpl.min.js"))
-        // .pipe(gulp.dest(destJs));
+        .pipe(uglify({
+            mangle: true,//类型：Boolean 默认：true 是否修改变量名
+            compress: true,//类型：Boolean 默认：true 是否完全压缩
+        }))
+        .pipe(concat(config.filename + "-all.tpl.min.js"))
+        .pipe(gulp.dest(destJs));
 });
 
 
