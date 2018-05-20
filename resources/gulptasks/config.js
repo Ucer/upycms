@@ -34,6 +34,11 @@ upyAllConf.src = {
         upyAllConf.dir + '/core/template/*/*.{html,tpl,tpl.html}',
         upyAllConf.dir + '/bench/template/*/*.{html,tpl,tpl.html}'
     ],
+    js: [
+        'dist/upy/js/upy-core.ctr.min.js',
+        'dist/upy/js/upy-bench.ctr.min.js',
+        'dist/upy/js/upy-conf.min.js',
+    ],
     all: [
         'dist/upy/js/upy-all.ctr.min.js',
         'dist/upy/js/upy-all.tpl.min.js',
