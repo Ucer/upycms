@@ -12,13 +12,13 @@ var gulp = require('gulp');
 var config = require('./config.js').admin;
 
 gulp.task('compress-admin-login', function () {
-    gulp.src(['resources/admin/login/*/*.*', 'resources/admin/login/*/*/*.*'])
+    gulp.src(['resources/src/admin/login/*/*.*', 'resources/src/admin/login/*/*/*.*'])
         .pipe(gulp.dest(config.dest + '/login'));
 });
 
 
 gulp.task('compress-admin', function() {
-    console.log('running compress-admin ... ');
+    console.log('running compress-admin ========================================== ');
     gulp.start('compress-admin-login');
 });
 

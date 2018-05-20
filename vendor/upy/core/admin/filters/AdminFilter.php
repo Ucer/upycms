@@ -17,12 +17,23 @@ use wpg\setting\models\Setting;
 class AdminFilter extends ActionFilter
 {
 
-	/**
-	 * 所有action执行前执行
-	 * @return  boolean  $data
-	 */
+
 	public function beforeAction($action){
-	    dd('bf');
-		return true;
-	}
+        if (!Yii::$app->request->isPost || !Yii::$app->request->isAjax){
+            if (Yii::$app->request->isAjax){
+                Yii::$app->response->format = 'json';
+                Yii::$app->response->data = ['code' => 400, 'msg' => '非法请求'];
+                return false;
+            }else{
+                $tpl = Yii::getAlias('@upy') . '\admin\views\error.html';
+                Yii::$app->response->data = $action->controller->renderFile($tpl, [
+                    'name' => Yii::getAlias('@name'),
+                    'tipinfo' => '非法请求'
+                ]);
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

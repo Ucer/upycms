@@ -20,6 +20,11 @@ $params = require __DIR__ . '/params.php';
 $urls = require(__DIR__ . '/urls.php');
 $components = require(__DIR__ . '/components.php');
 $upyModules = require(__DIR__ . '/modules.php');
+$upyConfig = require(__DIR__ . '/upy.php');
+
+
+Yii::setAlias('@name', $upyConfig['name']);
+Yii::setAlias('@version', $upyConfig['version']);
 
 $twigFunctions = [];
 $modulePathList = [];
@@ -69,9 +74,9 @@ $config = [
     'components' => $components,
     'modules' => $modules,
     'params' => $params,
-    'language' => 'zh-CN',
-    'timeZone'=>'Asia/Chongqing',
 ];
+
+return array_merge($config,$upyConfig);
 
 
 //if (YII_ENV_DEV) {
@@ -92,6 +97,5 @@ $config = [
 //}
 
 
-return $config;
 
 

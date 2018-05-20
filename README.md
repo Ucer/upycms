@@ -16,8 +16,9 @@ www  WEB部署目录（或者子目录）
 │  ├─config             应用配置文件
 │  │  ├─components.php  组件配置
 │  │  ├─db.php          数据库配置
-│  │  ├─params          params 配置
-│  │  ├─urls            路由配置文件
+│  │  ├─params.php       params 配置
+│  │  ├─urls.php         路由配置文件
+│  │  ├─upy.php          Yii 基本配置文件
 ```
 
 ## 功能如下

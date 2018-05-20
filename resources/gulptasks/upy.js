@@ -24,7 +24,7 @@ gulp.task('compress-upy-css', function() {
 });
 
 gulp.task('compress-upy', function() {
-    console.log('running compress-upy ... ');
+    console.log('running compress-upy  ==========================================  ');
     gulp.start('compress-upy-css');
 });  
 
