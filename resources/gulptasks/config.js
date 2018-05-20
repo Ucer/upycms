@@ -31,8 +31,8 @@ upyAllConf.dir = 'resources/' + upyAllConf.name;
 upyAllConf.dest = destDir + '/' + upyAllConf.name;
 upyAllConf.src = {
     tpl: [
-        upyAllConf.name + '/core/template/*/*.{html,tpl,tpl.html}',
-        upyAllConf.name + '/bench/template/*/*.{html,tpl,tpl.html}'
+        upyAllConf.dir + '/core/template/*/*.{html,tpl,tpl.html}',
+        upyAllConf.dir + '/bench/template/*/*.{html,tpl,tpl.html}'
     ],
     all: [
         'dist/upy/js/upy-all.ctr.min.js',

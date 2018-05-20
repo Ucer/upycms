@@ -42,7 +42,7 @@ var html2jsOptions = {
  */
 
 gulp.task('compress-upy-step7', function() {
-    return gulp.src(configAll.src.tpl)
+    return gulp.src(configAll.src.tpl) // resources/upy/「core/bench」/template/* ===> web/static/dist/upy/js/upy-all.tpl.min.js
         .pipe(changed(config.name + '-tpl', {extension: 'html'}))
         .pipe(htmlmin({
             collapseWhitespace: true
