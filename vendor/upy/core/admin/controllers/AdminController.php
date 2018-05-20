@@ -25,14 +25,6 @@ class AdminController extends AdminBaseController
             'permission' => [
                 'class' => AdminPermissionFilter::className(),
             ],
-//            'ip' => [
-//                'class' => AdminIpFilter::className(),
-//                'except' => ['logout'],
-//            ],
-//            'afterAction' => [
-//                'class' => AdminAfterActionFilter::className(),
-//                'except' => ['index'],
-//            ]
         ];
     }
 
@@ -40,9 +32,14 @@ class AdminController extends AdminBaseController
     {
         if (YII_ENV === 'dev') {
             $debug = true;
-            $distUrl = '/../resources/src/admin/';
-            $proRoot = Yii::getAlias('@proRoot');
-            $jspath = '/../resources/src/admin/js';
+            $distUrl = '/static/src/admin/';
+            $proRoot = Yii::getAlias('@proRoot'). '/web';
+            $jspath = '/static/src/admin/js';
+            $this->scanDir($fileList, $proRoot . $jspath);
+            $jsFileList = [];
+            foreach ($fileList as $key=>$value){
+                array_push($jsFileList, $jspath . $value);
+            }
         } else {
             $debug = false;
             $distUrl = '/static/dist/admin/';
@@ -52,7 +49,25 @@ class AdminController extends AdminBaseController
         $csrfToken = Yii::$app->request->getCsrfToken();
         $name = Yii::getAlias('@name');
         $version = Yii::getAlias('@version');
-        return $this->render('/index.html', compact('debug', 'distUrl', 'siteUrl', 'csrfToken', 'name', 'version'));
+        return $this->render('/index.html',get_defined_vars());
 
+    }
+
+    protected function scanDir(&$arr_file, $directory, $dir_name='')
+    {
+
+        $mydir = dir($directory);
+        while($file = $mydir->read())
+        {
+            if((is_dir("$directory/$file")) AND ($file != ".") AND ($file != ".."))
+            {
+                $this->scan_dir($arr_file, "$directory/$file", "$dir_name/$file");
+            }
+            else if(($file != ".") AND ($file != ".."))
+            {
+                $arr_file[] = "$dir_name/$file";
+            }
+        }
+        $mydir->close();
     }
 }
