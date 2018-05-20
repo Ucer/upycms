@@ -161,12 +161,40 @@ gulp.task('compress-upy-step7', function() {
         .pipe(gulp.dest(destJs));
 });
 
+gulp.task('compress-upy-css', function() {
+    gulp.src(config.src.all_img)
+        .pipe(gulp.dest(config.dest + '/img'));
+
+    gulp.src(config.src.all_css)
+        .pipe(concat(config.filename + '.css'))
+        .pipe(gulp.dest(config.dest + '/css'))
+        .pipe(minifycss())
+        .pipe(concat(config.filename + '.min.css'))
+        .pipe(gulp.dest(config.dest + '/css'));
+
+    gulp.src([config.dir + '/css/login.css'])
+        .pipe(concat('login.css'))
+        .pipe(gulp.dest(config.dest + '/css'))
+        .pipe(minifycss())
+        .pipe(concat('login.min.css'))
+        .pipe(gulp.dest(config.dest + '/css'));
+
+    gulp.src([config.dir + '/css/file.css'])
+        .pipe(concat('file.css'))
+        .pipe(gulp.dest(config.dest + '/css'))
+        .pipe(minifycss())
+        .pipe(concat('file.min.css'))
+        .pipe(gulp.dest(config.dest + '/css'));
+});
+
 
 gulp.task('compress-upy', function () {
     console.log('running compress-upy  ==========================================  ');
     // gulp.start('compress-upy-core');
     // gulp.start('compress-upy-bench');
-    gulp.start('compress-upy-all');
+    // gulp.start('compress-upy-all');
+    gulp.start('compress-upy-css');
+
 });
 
 gulp.task('help', function () {

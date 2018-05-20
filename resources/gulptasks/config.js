@@ -52,12 +52,26 @@ upyConf.src = {
         upyConf.dir + '/core/template/*/*.{html,tpl,tpl.html}',
         upyConf.dir + '/bench/template/*/*.{html,tpl,tpl.html}'
     ],
-
-
     all_stp_two: [// ==> web/static/dist/upy/upy-all.min.js
         upyConf.dest + '/js/upy-all.ctr.min.js',
         upyConf.dest + '/js/upy-all.tpl.min.js',
         upyConf.dest + '/js/upy.conf.min.js',
+    ],
+
+    all_img: [ // ==> web/static/dist/upy/img/
+        upyConf.dir + '/img/*.*',
+        upyConf.dir + '/img/*/*.*',
+        upyConf.dir + '/img/*/*/*.*',
+        upyConf.dir + '/img/*/*/*/*.*'
+    ],
+    all_css: [ // ==> web/static/dist/upy/css/upy.min.css
+        'libs/bootstrap-plugin/bootstrap-additions/0.3.1/bootstrap-additions.min.css',
+        'libs/jquery-plugin/clockpicker/0.0.7/bootstrap-clockpicker.min.css',
+        'libs/jquery-plugin/spectrum/1.8.0/spectrum.css',
+        'libs/videojs/5.4.4/video-js.min.css',
+        upyConf.dir + '/css/*.css',
+        '!' + upyConf.dir + '/css/*.min.css',
+        '!' + upyConf.dir + '/css/login.css'
     ],
 
 };
