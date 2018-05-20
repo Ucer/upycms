@@ -49,13 +49,13 @@ class WebController extends BaseController
         ]);
 
         $admin_white_iplist = ArrayHelper::getValue($securitySetting, 'admin_white_iplist', []);
-        $admin_notaccess_tip = ArrayHelper::getValue($securitySetting, 'admin_notaccess_tip', '没有访问权限，请联系管理员');
+//        $admin_notaccess_tip = ArrayHelper::getValue($securitySetting, 'admin_notaccess_tip', '没有访问权限，请联系管理员');
         $userIp = Yii::$app->request->userIP;
 
         if ($this->request->isAjax && $this->request->isPost) { // 登录
             if (count($admin_white_iplist) && !in_array($userIp, $admin_white_iplist)) {
                 $message = '非法访问(受限IP)';
-                AdminLog::addLog('warn', 'upy-account', 'login', $message, '');
+                AdminLog::addLog('warn', 'upy-account', 'login', $message, $userIp);
                 return $this->failed($message);
             }
 
@@ -70,7 +70,7 @@ class WebController extends BaseController
                 return $this->ajaxReturnSuccess(['url' => $url]);
             } else {
                 $errorInfo = $m_admin_login_form->getError() ? $m_admin_login_form->getError() : '用户名或密码错误';
-                AdminLog::addLog('warn', 'upy-account', 'login', $errorInfo, '');
+                AdminLog::addLog('warn', 'upy-account', 'login', $errorInfo, $postData['username']);
                 return $this->failed($errorInfo);
             }
         } else {
