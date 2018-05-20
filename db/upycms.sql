@@ -44,3 +44,8 @@ CREATE TABLE IF NOT EXISTS upy_admin_users (
   PRIMARY KEY (`id`),
   UNIQUE KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='后台管理员表';
+
+INSERT INTO `upy_admin_users` (`id`, `role_id`, `type`, `username`, `password`, `salt`, `nickname`, `email`, `status`, `created_at`, `updated_at`) VALUES
+(1, 0, 'developer', 'upyadmin', '$2y$13$OfhOHXmioCIFArAK4s/UGucsuHCru5wfy.WiO2rkXoUIeh6u6PL2i', 'breL8QvcCJSMjDoze5rdB2KnN1dfEwzh', '', '', 1, '2018-05-20 20:40:34', '2018-05-20 20:40:34');
+
+

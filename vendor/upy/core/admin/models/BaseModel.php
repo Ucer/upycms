@@ -31,6 +31,7 @@ class  BaseModel extends ActiveRecord
             try{
                 return $this->save();
             }catch(yii\db\Exception $e){
+                throw $e; // 生产环境删除
                 $errorInfo = count($e->errorInfo) == 3 ? $e->errorInfo[2] : '';
                 $errorInfo = $errorInfo ? '数据保存失败：'.$errorInfo : '数据保存失败，请联系管理员。';
                 $this->addError('upy_db_exception', $errorInfo);

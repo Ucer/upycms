@@ -45,7 +45,6 @@ class WebController extends BaseController
 
     public function actionLogin()
     {
-        $errorInfo = '';
         if (!Yii::$app->admin->isGuest){
             return $this->redirect(['/admin/']);
         }
@@ -69,11 +68,7 @@ class WebController extends BaseController
             $postData = $this->request->post();
             $url = $this->request->post('next', '/admin');
             if ($m_admin_login_form->load($postData, '') && $m_admin_login_form->login()) {
-                if (!$url) {
-                    $url = '/admin';
-                }
-
-                return $this->ajaxReturnSuccess(['url' => $url]);
+                return $this->failed(['url' => $url]);
             } else {
                 $errorInfo = $m_admin_login_form->getError() ? $m_admin_login_form->getError() : '用户名或密码错误';
                 AdminLog::addLog('warn', 'upy-account', 'login', $errorInfo, $postData['username']);
@@ -95,7 +90,7 @@ class WebController extends BaseController
     public function actionTest()
     {
         $data = [
-            'username' => 'ucer',
+            'username' => 'upyadmin',
             'password' => '123456'
         ];
         $m = new AdminUser();
