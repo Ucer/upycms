@@ -1,0 +1,78 @@
+<form id="app-form" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="app-type-field"> 应用类型</label>
+        <div class="col-md-9 controls">
+            <div class="form-control-static">
+               <i class="fa fa-{{ app.typeAttr.icon }}"></i> {{ app.typeAttr.name }} ({{ app.typeAttr.code }})
+
+               <a class="text-muted mll" href="javascript:;" ng-click="$parent.js_app_create(1)" ng-if="!app.id">更换</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label"> 应用名称</label>
+        <div class="col-md-9 controls">
+            <input class="form-control" type="text" ng-model="app.name" wpg-validator="required|chineseSpecname|minlength(2)|maxlength(100)" wpg-trim>
+            <div class="help-block">应用的名称，例如文章、案例、留言板等</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">应用标识</label>
+        <div class="col-md-9 controls">
+            <input class="form-control" type="text" ng-model="app.code" wpg-validator="required|specname|minlength(2)|maxlength(30)" wpg-trim>
+            <div class="help-block">应用的唯一标识符，例如article、case、guestbook等
+            <br>应用标识符只能是英文开头，可含英文、数字和下划线
+            <br>应用标识符同时作为数据库中的表名标识
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="app-table-field">应用图标</label>
+        <div class="col-md-9 controls">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-{{ app.icon }}"></i>
+                </span>
+                <input type="text" class="form-control" ng-model="app.icon" wpg-validator="required" wpg-trim>
+            </div>
+            <div class="help-block">
+                输入 
+                <a href="http://fontawesome.io/icons/" target="_blank">fontawesome</a> 中的图标名称，不带前缀"fa-"
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="app-table-field">应用图片空间</label>
+        <div class="col-md-9 controls">
+            <div class="form-control-static" ng-if="app.album.id">
+               {{ app.album.name }} ({{ app.album.id }})
+
+               <a class="text-muted mll" href="javascript:;" ng-click="js_album_update(app.album)">设置</a>
+            </div>
+            <button class="btn btn-default btn-sm" ng-click="js_album_create()" ng-if="!app.album.id">创建空间</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="app-status-field">应用状态</label>
+        <div class="col-md-9 controls">
+            <label class="radio-inline mrl">
+                <input type="radio" name="status" value="1" ng-model="app.status" ng-checked="app.status" wpg-icheck> 开启
+            </label>
+            <label class="radio-inline mrl">
+                <input type="radio" name="status" value="0" ng-model="app.status" ng-checked="app.status" wpg-icheck> 关闭
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="app-table-field">应用描述</label>
+        <div class="col-md-9 controls">
+            <textarea class="form-control" id="app-description-field" type="text" name="description" ng-model="app.description" rows="5" tabindex="3" placeholder="简要描述下应用"></textarea>
+        </div>
+    </div>
+</form>

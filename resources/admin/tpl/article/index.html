@@ -1,0 +1,146 @@
+<div class="contentpanel-layout" wpg-page="pageConfig.pagecode">
+    <div class="contentview-layout footer-in" ng-class="{true:'bottom-in',false:'bottom-out'}[getChecked().length!=0]">
+        <div class="contentview-main">
+            <div class="contentview-header">
+                <div class="title pull-left">
+                    <h3 style="margin-top: 0px;"><i class="fa fa-{{ $app.icon|default:'file-text-o' }}"></i> {{ $app.name }} 列表</h3>
+                </div>
+                <span ng-show="total" class="badge mlm pull-left data-count" style="font-size: 18px;">{{ total }}</span>
+                <div ng-if="$app.parent.id" class="pull-left form-group mll">
+                    <button class="btn btn-default pull-left mrl" type="button" ng-click="onClickBack()" text="返回">返回</button>
+                </div>
+                <div class="pull-left form-group mll">
+                    <button class="btn btn-default pull-left mrl" type="button" ng-click="onRefresh()" text="刷新">
+                        <i class="fa fa-refresh"></i>
+                    </button>
+                </div>
+                <div class="pull-right form-group">
+                    <button class="btn btn-danger pull-left mrl" type="button" ng-click="onClickCreate()"><i class="glyphicon glyphicon-plus"></i> 新增{{ $app.name}}</button>
+                    <button class="btn btn-default pull-left mrl" type="button" ng-repeat="app in $app.subapps" ng-click="js_appdata_manager(app)" text="{{ app.name }}">{{ app.name }}</button>
+                    <button class="btn btn-default pull-left mrl" type="button" ng-click="js_article_catemgr()" text="栏目管理">栏目管理</button>
+                    <div class="shortcut-search input-group pull-left" ng-if="!global.article.sidebar">
+                        <input type="text" name="keyword" class="form-control" placeholder="输入{{ shortcutSearch.title }}" ng-model="shortcutSearch.value">
+                        <span class="input-group-addon" ng-click="setShortcutSearchKeyword()"><i class="glyphicon glyphicon-search"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="contentview-body">
+                <table class="table table-hover data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;">
+                                <input type="checkbox" autocomplete="off" data-role="batch-select" ng-checked="isCheckAll()" ng-click="onClickSwitchAll()">
+                            </th>
+                            <th style="width: 80px;">编号ID</th>
+                            <th>标题</th>
+                            <th>栏目</th>
+                            <th class="text-center" style="width: 80px;">浏览</th>
+                            <th class="text-center" style="width: 80px;">回复</th>
+                            <th class="text-center" style="width: 80px;">点赞</th>
+                            <th class="text-center" style="width: 120px;">属性</th>
+                            <th class="text-center" style="width: 70px;">状态</th>
+                            <th class="text-center" style="width: 130px;">更新时间</th>
+                            <th style="width: 100px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in list track by item.id" data-role="item" ng-click="onClickItem(item)" class="fade-remove">
+                            <td>
+                                <input type="checkbox" ng-checked="item._checked">
+                            </td>
+                            <td ng-bind="item.id"></td>
+                            <td>
+                                <a href="{{ item.aurl }}" ng-bind="item.title" title="预览" target="_blank"></a>
+                            </td>
+                            <td ng-bind="item.category.name"></td>
+                            <td class="text-center" ng-bind="item.view_count"></td>
+                            <td class="text-center" ng-bind="item.post_count"></td>
+                            <td class="text-center" ng-bind="item.up_count"></td>
+                            <td class="text-center">
+                                <a href="javascript:;" class="featured-label" ng-click="onClickChangeProperty(item, 'featured')" title="头条"><span class="label label-success" ng-show="item.featured">头</span><span class="label label-default" ng-hide="item.featured">头</span></a>
+                                <a href="javascript:;" class="promoted-label" ng-click="onClickChangeProperty(item, 'recommended')" title="推荐"><span class="label label-success" ng-show="item.recommended">荐</span><span class="label label-default" ng-hide="item.recommended">荐</span></a>
+                                <a href="javascript:;" class="promoted-label" ng-click="onClickChangeProperty(item, 'sticky')" title="置顶"><span class="label label-success" ng-show="item.sticky">顶</span><span class="label label-default" ng-hide="item.sticky">顶</span></a>
+                            </td>
+                            <td class="text-center">
+                                <span class="text-success" ng-if="item.status=='published'">已发布</span>
+                                <span class="text-muted" ng-if="item.status=='unpublished'">未发布</span>
+                                <span class="text-danger" ng-if="item.status=='trash'">回收站</span>
+                            </td>
+                            <td class="text-center" ng-bind="item.updated_time|limitTo:16"></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="javascript:;" ng-click="onClickUpdate(item)" class="btn btn-default btn-sm">编辑</a>
+                                    <a href="javascript:;" class="btn btn-default btn-sm" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:" ng-if="item.status!='published'" ng-click="onClickPublish(item)">发布文章</a></li>
+                                        <li><a href="javascript:" ng-if="item.status=='published'" ng-click="onClickUnpublish(item)">取消发布</a></li>
+                                        <li><a href="javascript:" ng-click="onClickCopy(item)">复制文章</a></li>
+                                        <li><a href="javascript:" ng-if="item.status!='trash'" ng-click="onClickTrash(item)">移至回收站</a></li>
+                                        <li><a href="javascript:" ng-if="item.status=='trash'" ng-click="onClickRemove(item)"><span class="text-danger">永久删除</span></a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="contentview-footer">
+                <div ng-model="paginator" wpg-paginator></div>
+            </div>
+        </div>
+        <div class="contentview-sidebar" wpg-contextswitch>
+            <div class="contentview-sidebar-header">
+                <div class="contextswitch-button"><ul>
+                <li>
+                    <a href="javascript:;"><i class="fa fa-line-chart"></i> 统计</a>
+                </li>
+                <li class="active">
+                    <a href="javascript:;"><i class="fa fa-search"></i> 搜索</a>
+                </li>
+                <li class="last">
+                    <a href="javascript:;"><i class="glyphicon glyphicon-sort" style="font-size: 14px;"></i> 排序</a>
+                </li>
+                </ul></div>
+            <!-- 搜索{{ appData.name}} -->
+            </div>
+            
+            <div class="contextswitch-content">
+                <div class="contentview-sidebar-body">
+                    统计图表
+                </div>
+            </div>
+
+            <div class="contextswitch-content">
+                <div class="contentview-sidebar-body">
+                    <div class="advanced-search" ng-model="parameter.filters" data="searchData" wpg-search></div>
+                </div>
+                <div class="contentview-sidebar-footer">
+                    <a href="javascript:;" class="btn btn-default pull-left" ng-click="onSearch()"><i class="fa fa-search"></i> 搜索</a>
+                    <a href="javascript:;" class="btn btn-default pull-right" ng-click="onReset()">重置</a>
+                </div>
+            </div>
+            <div class="contextswitch-content">
+                <div class="contentview-sidebar-body">
+                    <div data="orderbyData" wpg-orderby></div>
+                </div>
+            </div>
+        </div>
+        <div class="contentview-bottom">
+            <span class="count">
+                已选中 {{ getChecked().length }} 条{{ $app.name}}
+            </span>
+            <button class="btn btn-default mlm mrm" ng-click="onClickCheckInverse()">反选</button>
+            <div class="btn-group mlm">
+                <button class="btn btn-success" ng-click="onClickBatchVisibility(true)">发布</button>
+                <button class="btn btn-default" ng-click="onClickBatchVisibility(false)">取消发布</button>
+            </div>
+            <button class="btn btn-default mll" data-role="batch-delete" ng-click="onClickRemove()"><span class="text-danger"><i class="glyphicon glyphicon-trash"></i> 永久删除</span></button>
+            <button class="btn btn-danger" ng-click="onClickCheckClean()" style="margin-left: 60px">取消</button>
+        </div>
+        <div class="contentview-loading" ng-if="loading && !initing">
+            <div class="wpg-loading-content"></div>
+        </div>
+    </div>
+</div>

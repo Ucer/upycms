@@ -1,0 +1,165 @@
+<div>
+    <div class="form-group">
+        <div class="control-label">
+            <label>前台列表页</label>
+        </div>
+        <div class="controls">
+            <div class="clearfix">
+                <label class="radio-inline mrl">
+                    <input type="radio" value="1" ng-model="appInfo.listpage.status" wpg-icheck> 开启
+                </label>
+                <label class="radio-inline mrl">
+                    <input type="radio" value="0" ng-model="appInfo.listpage.status" wpg-icheck> 关闭 
+                </label>
+            </div>
+
+            <div class="input-group mtl" ng-if="appInfo.listpage.status==1">
+                <div class="input-group-addon">默认模板</div>
+                <select class="form-control fl" ng-model="appInfo.listpage.tpl">
+                    <option>
+                    --请选择模板--
+                    </option>
+                    <option ng-repeat="tpl in tplList" value="{{ tpl.name }}" ng-bind="tpl.name">
+                    </option>
+                </select>
+            </div>
+
+            <div class="input-group mtl" ng-if="appInfo.listpage.status==1">
+                <div class="input-group-addon">每页显示</div>
+                <input type="number" class="form-control" ng-model="appInfo.listpage.number" min="1" max="1000" step="1" placeholder="1-1000" wpg-validator="required|number" wpg-trim>
+                <div class="input-group-addon">条数据</div>
+            </div>
+
+            <div class="form-group mtl" ng-if="appInfo.listpage.status==1">
+                <div class="control-label">
+                    <label style="font-weight: normal">数据排序规则</label>
+                </div>
+                <div class="controls">
+                    <div class="clearfix mbm" ng-repeat="o in orderList">
+                        <select class="form-control input-sm fl mrm" ng-model="o.field" style="width: 130px;">
+                            <option ng-repeat="f in orderOptions" ng-if="o.field==f.field||orderFields.indexOf(f.field)===-1" value="{{ f.field }}">{{ f.name }}</option>
+                        </select>
+
+                        <div class="btn-group fl mrm" role="group" style="width: 68px;">
+                           <button type="button" class="btn btn-sm" ng-class="{'btn-primary': o.type == 'asc', 'btn-default': o.type == 'desc'}" ng-click="js_listpage_changeorder(o, 'asc')" title="从小到大"><i class="fa fa-arrow-up"></i></button>
+                           <button type="button" class="btn btn-sm" ng-class="{'btn-primary': o.type == 'desc', 'btn-default': o.type == 'asc'}" ng-click="js_listpage_changeorder(o, 'desc')" title="从大到小"><i class="fa fa-arrow-down"></i></button>
+                        </div>
+
+                        <button type="button" class="btn btn-default btn-sm fl" ng-click="js_listpage_delorder($index)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="js_listpage_addorder()">
+                        <i class="fa fa-plus"> 添加</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="control-label">
+            <label>前台内容页</label>
+        </div>
+        <div class="controls">
+            <div class="clearfix">
+                <label class="radio-inline mrl">
+                    <input type="radio" value="1" ng-model="appInfo.infopage.status" wpg-icheck> 开启
+                </label>
+                <label class="radio-inline mrl">
+                    <input type="radio" value="0" ng-model="appInfo.infopage.status" wpg-icheck> 关闭 
+                </label>
+            </div>
+
+            <div class="input-group mtl" ng-if="appInfo.infopage.status==1">
+                <div class="input-group-addon">默认模板</div>
+                <select class="form-control fl" ng-model="appInfo.infopage.tpl">
+                    <option>
+                    --请选择模板--
+                    </option>
+                    <option ng-repeat="tpl in tplList" value="{{ tpl.name }}" ng-bind="tpl.name">
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="control-label">
+            <label>前台发布内容</label>
+        </div>
+        <div class="controls">
+            <div class="clearfix">
+                <label class="radio-inline mrl">
+                    <input type="radio" value="1" ng-model="appInfo.postinfo.status" wpg-icheck> 开启
+                </label>
+                <label class="radio-inline mrl">
+                    <input type="radio" value="0" ng-model="appInfo.postinfo.status" wpg-icheck> 关闭 
+                </label>
+            </div>
+
+            <div class="form-group mtl" ng-if="appInfo.postinfo.status==1">
+                <div class="control-label">
+                    <label style="font-weight: normal">提交成功后提示消息</label>
+                </div>
+                <div class="controls">
+                    <input type="text" class="form-control" ng-model="appInfo.postinfo.msg" placeholder="提交成功后的提示消息正文">
+                </div>
+            </div>
+
+            <div class="form-group mtl" ng-if="appInfo.postinfo.status==1">
+                <div class="control-label">
+                    <label style="font-weight: normal">提交成功后返回地址</label>
+                </div>
+                <div class="controls">
+                    <label class="radio-inline">
+                        <input type="radio" value="1" ng-model="appInfo.postinfo.return" wpg-icheck> 列表页
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="2" ng-model="appInfo.postinfo.return" wpg-icheck> 内容页
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="0" ng-model="appInfo.postinfo.return" wpg-icheck> 首页
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-show="appInfo.type === 'app'">
+        <div class="control-label">
+            <label>设置内置控件</label>
+        </div>
+        <div class="controls">
+            <label class="radio-inline mrl">
+                <input type="radio" value="1" ng-model="appInfo.metacontrol" wpg-icheck> 开启
+            </label>
+            <label class="radio-inline mrl">
+                <input type="radio" value="0" ng-model="appInfo.metacontrol" wpg-icheck> 关闭
+            </label>
+            <div class="help-block">是否开启内置控件,默认为“关闭”<br>
+            开启后,表单呈现方式只能是“新链接”<br>
+            内置控件包括访问量、排序号、推荐位、SEO设置等
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-show="appInfo.type === 'app'">
+        <div class="control-label">
+            <label>表单呈现方式</label>
+        </div>
+        <div class="controls">
+            <label class="radio-inline mrs">
+                <input type="radio" value="1" ng-model="appInfo.formtype" wpg-icheck> 新链接
+            </label>
+            <label class="radio-inline mrs">
+                <input type="radio" value="2" ng-model="appInfo.formtype" wpg-icheck> 侧滑
+            </label>
+            <label class="radio-inline">
+                <input type="radio" value="3" ng-model="appInfo.formtype" wpg-icheck> 弹窗
+            </label>
+            <div class="help-block">新增或编辑数据时，表单呈现方式
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+<div class="contentpanel-layout formdata-manager" wpg-page="pageConfig.pagecode">
+    <div class="contentview-layout footer-in" ng-class="{true:'bottom-in',false:'bottom-out'}[selectedItems.length!=0]">
+        <div class="contentview-main">
+            <div class="contentview-header">
+                <div class="title pull-left">
+                    <h3 style="margin-top: 0px;">
+                        <i class="fa fa-{{ $app.icon|default:'list' }}"></i> {{ $app.name }}
+                    </h3>
+                </div>
+                <span ng-show="total" class="badge mlm pull-left data-count" style="font-size: 18px;">{{ total }}</span>
+                <div ng-if="$app.parent.id" class="pull-left form-group mll">
+                    <button class="btn btn-default pull-left mrl" type="button" ng-click="js_appdata_manager($app.parent)" text="返回">返回</button>
+                </div>
+                <div class="pull-right form-group">
+                    <button class="btn btn-danger pull-left mrl" ng-click="js_appdata_create()"><i class="glyphicon glyphicon-plus"></i> 添加数据</button>
+                    <button class="btn btn-default pull-left mrl" type="button" ng-repeat="app in $app.subapps" ng-click="js_appdata_manager(app)" text="{{ app.name }}">{{ app.name }}</button>
+                    <a ng-repeat="field in $app.fields track by field.id" ng-if="field.type=='category'" href="#/app/{{ $app.code }}/fc-{{ field.field }}">
+                        <button class="btn btn-default pull-left mrl" type="button" text="{{ field.name }}管理">{{ field.name }}管理</button>
+                    </a>
+
+                    <div class="shortcut-search input-group pull-left">
+                        <input type="text" name="keyword" class="form-control" placeholder="输入{{ shortcutSearch.title }}" ng-model="shortcutSearch.value">
+                        <span class="input-group-addon" ng-click="setShortcutSearchKeyword()"><i class="glyphicon glyphicon-search"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="contentview-body">
+                <table class="table table-hover data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;">
+                                <input type="checkbox" autocomplete="off" data-role="batch-select" ng-checked="$isCheckAll()" ng-click="$selectAllToggle()">
+                            </th>
+                            <th style="width: 80px;">编号ID</th>
+                            <th ng-repeat="field in $app.fields track by field.id" ng-if="field.show">{{ field.name }}</th>
+                            <th style="width: 120px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in allItems track by item.data_id" data-role="item" ng-click="onClickItem(item)" class="fade-remove">
+                            <td>
+                                <input type="checkbox" ng-checked="item.isSelected">
+                            </td>
+                            <td>{{ item.data_id }}</td>
+                            <td ng-repeat="field in $app.fields track by field.id" ng-if="field.show">
+                                <span ng-if="field.type!='select' && field.type!='category' && field.type!='image' && field.type!='images'">{{ item[field.field] }}</span>
+
+                                <span ng-if="field.type=='select' || field.type=='category'">
+                                {{ item|fieldDisplay:field.field }}
+                                </span>
+
+                                <a ng-href="{{ item[field.field]['url'] }}" ng-if="field.type=='image' && item[field.field]" target="_blank">
+                                    <img ng-src="{{ item[field.field]|thumb:100 }}">
+                                </a>
+
+                                <div ng-if="field.type=='images' && item[field.field]">
+                                    <a class="fl mrm" ng-repeat="i in item[field.field]|limitTo:3" ng-href="{{ i['url'] }}" target="_blank">
+                                        <img ng-src="{{ i|thumb:42 }}">
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="javascript:;" class="btn btn-default btn-sm" ng-click="js_appdata_update(item)">编辑</a>
+                                <a href="javascript:;" class="btn btn-default btn-sm" ng-click="js_appdata_delete(item)"><span class="text-danger">删除</span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="contentview-footer">
+                <div ng-model="paginator" wpg-paginator></div>
+            </div>
+        </div>
+        <div class="contentview-sidebar" wpg-contextswitch>
+            <div class="contentview-sidebar-header">
+                <div class="contextswitch-button"><ul>
+                <li>
+                    <a href="javascript:;"><i class="fa fa-line-chart"></i> 统计</a>
+                </li>
+                <li class="active">
+                    <a href="javascript:;"><i class="fa fa-search"></i> 搜索</a>
+                </li>
+                <li class="last">
+                    <a href="javascript:;"><i class="glyphicon glyphicon-sort" style="font-size: 14px;"></i> 排序</a>
+                </li>
+                </ul></div>
+            <!-- 搜索{{ $app.name }} -->
+            </div>
+            <div class="contentview-sidebar-body">
+                <div class="contextswitch-content">
+                    统计图表
+                </div>
+                <div class="contextswitch-content advanced-search" ng-model="parameter.filters" data-search-items="adviceSearch" wpg-search></div>
+                <div class="contextswitch-content">
+                    <div wpg-orderby data="appDataOrderby"></div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="$app.formtype===2" class="contentview-sidebar sidebar-dataform" ng-class="{'in': fieldformOpen, 'out': !fieldformOpen}">
+            <div class="contentview-sidebar-header">
+                <div class="pull-left">
+                    <div class="fl">
+                        <span ng-if="!formData.data.data_id"><i class="glyphicon glyphicon-plus"></i> 添加{{ formInfo.name }}</span>
+                        <span ng-if="formData.data.data_id"><i class="glyphicon glyphicon-edit"></i> 编辑{{ formInfo.name }}</span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-default mrm" type="button" text="删除" ng-click="js_formdata_delete(formData.data)" ng-disabled="!formData.data.data_id"><span class="text-danger">删除</span></button>
+                    <button class="btn btn-default mrm" type="button" text="复制" ng-click="js_appdata_copy()">复制</button>
+                    <button class="btn btn-default mrm" type="button" text="预览" ng-click="js_appdata_preview()" ng-if="$app.infopage.status==1">预览</button>
+<!--                     <button class="btn btn-success mlm" ng-click="js_appdata_save()" ng-disabled="isSaving" style="margin-right: 50px;">
+                        <i class="fa fa-check"></i> 
+                        <span ng-if="!isSaving">保存数据</span>
+                        <span ng-if="isSaving">保存中...</span>
+                    </button>
+ -->
+                    <div class="btn-group" role="group" ng-disabled="isSaving" style="margin-right: 50px;">
+                        <button class="btn btn-success" ng-click="js_appdata_save()" ng-disabled="isSaving">
+                            <i class="fa fa-check"></i> 
+                            <span ng-hide="isSaving">确定保存</span>
+                            <span ng-show="isSaving">保存中 ...</span>
+                        </button>
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="plm" style="line-height: 40px;">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="pageConfig.savedStay" ng-true-value="1" ng-false-value="0" wpg-icheck> 保存后停留当前页
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a class="wpg-popup-normal-close" href="javascript:void(0);" ng-click="js_formpanel_close()" style="font-size: 18px;"></a>
+                </div>
+            </div>
+            <div class="contentview-sidebar-body">
+                <div class="col-md-12" ng-include="templateUrl.dataform"></div>
+            </div>
+        </div>
+        <div class="contentview-bottom">
+            <span class="count">已选中 {{ selectedItems.length }} 条数据</span>
+            <button class="btn btn-default mll" data-role="batch-delete" ng-click="js_appdata_delete()"><span class="text-danger"><i class="glyphicon glyphicon-trash"></i> 删除</span></button>
+            <button class="btn btn-danger" ng-click="$closeBottomTool()" style="margin-left: 60px">取消</button>
+        </div>
+
+        <div class="contentview-loading" ng-if="loading && !initing">
+            <div class="wpg-loading-content"></div>
+        </div>
+    </div>
+</div>

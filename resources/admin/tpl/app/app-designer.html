@@ -1,0 +1,126 @@
+<style>
+.muted {
+    color: #a6a6a6;
+    font-weight: normal;
+}
+
+ul.fieldset-control-navs  {
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul.fieldset-control-navs li:hover{
+    background-color: #449d44;
+};
+
+</style>
+<div class="contentpanel-layout fieldset-designer" id="fieldset-designer">
+    <div id="contentview-container" class="contentview-layout formdesigner-contentview-layout sidebar-in">
+        <div class="contentview-main">
+            <div class="contentview-header">
+                <div class="title pull-left">
+                    <h3 style="margin-top: 0px;"><i class="fa fa-th-large"></i> 应用设计器</h3>
+                </div>
+                <div class="pull-left form-group mll">
+                    <button class="btn btn-default pull-left mlm" type="button" ng-click="js_appmgr_return()" text="返回应用管理">返回</button>
+                    <a class="btn btn-default pull-left mll" type="button" href="#{{ appDataUrl }}" target="_blank" text="预览应用">预览</a>
+                </div>
+                <div class="pull-right form-group">
+                    <button class="btn btn-success pull-left mrm" ng-click="js_fieldset_save()" ng-disabled="!appInfo || isSaving || errorFieldCount>0">
+                        <i class="fa fa-check"></i> <span ng-hide="isSaving">确定保存</span>
+                        <span ng-show="isSaving">保存中...</span>
+                    </button>
+                </div>
+            </div>
+            <div class="contentview-body fieldset-designer-body">
+                <div ng-class="{'col-md-12': !appInfo.metacontrol||appInfo.metacontrol==0, 'col-md-8': appInfo.metacontrol==1}" ng-sortable="sortableConfig" ng-class="sortstatus">
+                    <div ng-repeat="field in appInfo.fields track by $index" id="field-item-{{ $index }}" class="row field-item" ng-click="js_field_click(field)" ng-mouseenter="js_field_enter(field)" ng-mouseleave="js_field_leave(field)" ng-class="{'editing': field._isEditing, 'active': field._isActive, 'haserror': field._hasError}">
+                        <div class="form-group">
+                            <div class="field-number">
+                                {{ $index+1 }}
+                            </div>
+                            <div ng-if="field.name" class="col-md-2 control-label">
+                                <label>{{ field.name }} <span ng-show="field.required" class="required">*</span></label>
+                                <p class="text-muted">[{{ field.field }}]</p>
+                            </div>
+
+                            <div ng-if="!field.name" class="col-md-2 control-label" style="color: #aaa;">
+                                <label ng-if="!field.name" style="color: #aaa;">未定义 <span ng-show="field.required" class="required">*</span></label>
+                                <p>[?]</p>
+                            </div>
+
+                            <div class="col-md-8 controls">
+                                <div ng-include="templateUrl.fieldcontrol"></div>
+                                <p class="help-block" ng-if="field.tip">{{ field.tip }}</p>
+                            </div>
+                        </div>
+                        <div class="field-action" ng-show="field._isActive">
+                            <a href="javascript:;" class="btn btn-default btn-sm mrs" ng-click="js_field_update(field)"><i class="fa fa-cog"></i></a>
+                            <a href="javascript:;" class="btn btn-default btn-sm" ng-click="js_field_copy(field)" ng-disabled="!field.name||!field.field"><i class="fa fa-copy"></i></a>
+                            <a href="javascript:;" class="btn btn-default btn-sm" ng-click="js_field_delete(field)"><span class="text-danger"><i class="fa fa-trash-o"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" ng-if="appInfo.metacontrol==1" ng-include="templateUrl.metacontrol" style="padding-right: 0px; float: right;">
+                </div>
+            </div>
+        </div>
+        <div class="contentview-sidebar" wpg-contextswitch>
+            <div class="contentview-sidebar-header">
+                <div class="contextswitch-button"><ul>
+                <li>
+                    <a href="javascript:;"><i class="fa fa-cog"></i> 设置</a>
+                </li>
+                <li>
+                    <a href="javascript:;"><i class="fa fa-desktop"></i> 界面</a>
+                </li>
+                <li class="last active">
+                    <a href="javascript:;"><i class="fa fa-square-o"></i> 控件</a>
+                </li>
+                </ul></div>
+            </div>
+            <div class="contentview-sidebar-body">
+                <div class="contextswitch-content" ng-include="templateUrl.appconfig"></div>
+
+                <div class="contextswitch-content" ng-include="templateUrl.uiconfig"></div>
+                
+                <div class="contextswitch-content active">
+                    <ul class="nav nav-pills nav-stacked fieldset-control-navs">
+                         <li ng-repeat="(key, value) in fieldTypeList" ng-click="js_field_create(key)">
+                            <a href="javascript:;"><i class="fa fa-{{ fieldTypeIcon[key] }}"></i><br>{{ value }}</a>
+                         </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="contentview-sidebar fieldset-fieldform footer-in" ng-class="{'in': fieldformOpen, 'out': !fieldformOpen}">
+            <div class="contentview-sidebar-header">
+                <div class="pull-left">
+                    <div class="fl">
+                        <a class="text-muted" href="javascript:;" ng-click="js_fieldform_panel_close()"><i class="fa fa-chevron-left"></i></a> 设置
+                    </div>
+                    <div class="fl mll text-danger field-attrtitle">
+                        <span class="field-attrtitle-name">{{ fieldData.name }}</span>
+                        <span class="field-attrtitle-field" ng-if="fieldData.field"> - {{ fieldData.field }} </span>
+                        <span class="text-muted field-attrtitle-type" ng-if="fieldData.type"> - {{ fieldData.type }}</span>
+                    </div>
+                </div>
+                <div class="pull-right form-group">
+                    <a class="wpg-popup-normal-close" href="javascript:void(0);" ng-click="js_fieldform_panel_close()" style="font-size: 18px;"></a>
+                </div>
+            </div>
+            <div class="contentview-sidebar-body">
+                <div ng-include="templateUrl.createfield"></div>
+            </div>
+
+            <div class="contentview-sidebar-footer">
+                <a href="javascript:;" class="btn btn-default pull-left" ng-click="js_field_copy(fieldData)" ng-disabled="!fieldData.name||!fieldData.field"><i class="fa fa-copy"></i> 复制</a>
+                <a href="javascript:;" class="btn btn-default pull-right" ng-click="js_field_delete(fieldData)"><span class="text-danger"><i class="fa fa-trash-o"></i> 删除</span></a>
+            </div>
+        </div>
+    </div>
+</div>

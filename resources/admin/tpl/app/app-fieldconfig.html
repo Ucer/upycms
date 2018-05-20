@@ -1,0 +1,189 @@
+<div ng-if="fieldData.type == 'text' || fieldData.type == 'mobile' || fieldData.type == 'phone' || fieldData.type == 'email'">
+    <div class="row form-group">
+        <div class="control-label">
+            <label>输入框大小</label>
+        </div>
+        <div class="controls">
+            <select class="form-control" ng-model="fieldData.config.size">
+                <option ng-repeat="size in ctrlSize" value="{{ size.value }}">{{ size.label }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div ng-if="fieldData.type == 'number'">
+    <div class="row form-group">
+        <div class="control-label">
+            <label>交互方式</label>
+        </div>
+        <div class="controls">
+            <label class="radio-inline mrl">
+                <input type="radio" value="1" ng-model="fieldData.config.mode" ng-checked="fieldData.config.mode==1" wpg-icheck> 输入数值
+            </label>
+            <label class="radio-inline">
+                <input type="radio" value="2" ng-model="fieldData.config.mode" ng-checked="fieldData.config.mode==2" wpg-icheck> 数值递增
+            </label>
+        </div>
+    </div>
+    <div class="row form-group" ng-if="fieldData.config.mode==1">
+        <div class="control-label">
+            <label>输入框大小</label>
+        </div>
+        <div class="controls">
+            <select class="form-control" ng-model="fieldData.config.size">
+                <option ng-repeat="size in ctrlSize" value="{{ size.value }}">{{ size.label }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row form-group" ng-if="fieldData.config.mode==2">
+        <div class="control-label">
+            <label>递增方式</label>
+        </div>
+        <div class="controls">
+            <div class="clearfix" style="height: 30px;">
+                <label class="fl pts" style="width: 114px; font-weight: normal">字段起始值</label>
+                <input type="number" class="form-control input-sm fl" min="1" step="1" ng-model="fieldData.default" style="width: 100px;" placeholder="递增起始值" wpg-validator="required|number">
+            </div>
+
+            <div class="clearfix mtm" style="height: 30px;">
+                <label class="checkbox-inline mrs fl pts">
+                    <input type="checkbox" ng-model="fieldData.config.autoadd_view_status" ng-checked="fieldData.config.autoadd_view_status" ng-true-value="1" ng-false-value="0" wpg-icheck> 浏览时递增 <span ng-show="fieldData.config.autoadd_view_status==1">+</span> 
+                </label>
+                <input type="number" class="form-control input-sm fl" min="1" step="1" ng-show="fieldData.config.autoadd_view_status==1" ng-model="fieldData.config.autoadd_view_value" style="width: 100px;" placeholder="增量值" wpg-validator="required|number">
+            </div>
+
+            <div class="clearfix mtm" style="height: 30px;">
+                <label class="checkbox-inline mrs fl pts">
+                    <input type="checkbox" ng-model="fieldData.config.autoadd_save_status" ng-checked="fieldData.config.autoadd_save_status" ng-true-value="1" ng-false-value="0" wpg-icheck> 保存时递增 <span ng-show="fieldData.config.autoadd_save_status==1">+</span> 
+                </label>
+                <input type="number" class="form-control input-sm fl" min="1" step="1" ng-show="fieldData.config.autoadd_save_status" ng-model="fieldData.config.autoadd_save_value" style="width: 100px;" placeholder="增量值" wpg-validator="required|number">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="fieldData.type == 'datetime'">
+    <div class="row form-group">
+        <div class="control-label">
+            <label>交互方式</label>
+        </div>
+        <div class="controls">
+            <label class="radio-inline mrm">
+                <input type="radio" value="1" ng-model="fieldData.config.mode" ng-checked="fieldData.config.mode==1" wpg-icheck> 选择时间
+            </label>
+            <label class="radio-inline">
+                <input type="radio" value="2" ng-model="fieldData.config.mode" ng-checked="fieldData.config.mode==2" wpg-icheck> 和时间戳同步
+            </label>
+        </div>
+    </div>
+
+    <div class="row form-group" ng-if="fieldData.config.mode==2">
+        <div class="control-label">
+            <label>时间戳同步参数</label>
+        </div>
+        <div class="controls">
+            <div class="clearfix" style="height: 30px;">
+                <label class="fl pts" style="width: 114px; font-weight: normal">字段起始值</label>
+                <input type="number" class="form-control input-sm fl" min="1" step="1" ng-model="fieldData.default" style="width: 100px;" placeholder="递增起始值" wpg-validator="required|number">
+            </div>
+
+            <div class="clearfix mtm" style="height: 30px;">
+                <label class="checkbox-inline mrl fl pts">
+                    <input type="checkbox" ng-model="fieldData.config.autosync_view" ng-checked="fieldData.config.autosync_view" ng-true-value="1" ng-false-value="0" wpg-icheck> 浏览时同步
+                </label>
+                <label class="checkbox-inline fl pts">
+                    <input type="checkbox" ng-model="fieldData.config.autosync_save" ng-checked="fieldData.config.autosync_save" ng-true-value="1" ng-false-value="0" wpg-icheck> 保存时同步 
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="fieldData.type == 'textarea'">
+    <div class="row form-group">
+        <div class="control-label">
+            <label>输入框大小</label>
+        </div>
+        <div class="controls">
+            <div class="input-group">
+                <span class="input-group-addon">宽度</span>
+                <select class="form-control" ng-model="fieldData.config.size">
+                    <option ng-repeat="size in ctrlSize" value="{{ size.value }}">{{ size.label }}</option>
+                </select>
+            </div>
+            <div class="input-group mtm">
+                <span class="input-group-addon">高度</span>
+                <input type="number" class="form-control" ng-model="fieldData.config.height" min="1" step="1" wpg-validator="required|positiveInteger">
+                <span class="input-group-addon">行</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="fieldData.type == 'radio' || fieldData.type == 'checkbox' || fieldData.type == 'select'">
+    <div class="row form-group">
+        <div class="control-label">
+            <label>字段选项</label>
+        </div>
+        <div class="controls">
+            <ul class="list-group list-group-min" ng-show="fieldData.config.options.length">
+                <li class="list-group-item" ng-repeat="opt in fieldData.config.options">
+                    {{ opt.name }}
+                    <span class="text-success pull-right" ng-if="opt.default">
+                        <i class="fa fa-check"></i>
+                    </span>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-default btn-sm" ng-click="js_field_optmgr(fieldData)">管理选项</button>
+        </div>
+    </div>
+
+    <div class="row form-group" ng-if="fieldData.type == 'select'">
+        <div class="control-label">
+            <label>选择框大小</label>
+        </div>
+        <div class="controls">
+            <select class="form-control" ng-model="fieldData.config.size">
+                <option ng-repeat="size in ctrlSize" value="{{ size.value }}">{{ size.label }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div ng-if="fieldData.type == 'category'">
+    <div class="row form-group">
+        <div class="control-label">
+            <label>选择框大小</label>
+        </div>
+        <div class="controls">
+            <select class="form-control" ng-model="fieldData.config.size">
+                <option ng-repeat="size in ctrlSize" value="{{ size.value }}">{{ size.label }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div ng-if="fieldData.type == 'image'">
+    <div class="row form-group">
+        <div class="control-label">
+            <label>默认图</label>
+        </div>
+        <div class="controls">
+            <div class="wpg-edit-images clearfix" ng-model="field.value" wpg-imgupload="iamgeUploadOptions" style="margin-top: 0px;">
+            </div>
+            <p class="help-block">未上传图片时的默认图</p>
+        </div>
+    </div>
+</div>
+
+<div ng-if="fieldData.type == 'text'">
+    <div class="row">
+        <div class="control-label">
+            <label>默认值</label>
+        </div>
+        <div class="controls">
+            <input type="text" class="form-control" ng-model="fieldData.default">
+            <p class="help-block">{{ fieldData.name }}未输时的默认值</p>
+        </div>
+    </div>
+</div>

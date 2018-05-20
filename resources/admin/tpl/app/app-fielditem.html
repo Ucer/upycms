@@ -1,0 +1,39 @@
+<div class="form-group">
+    <div class="control-label">
+        <label>{{ item.name }}</label>
+    </div>
+
+    <div class="controls" ng-if="item.type == 'text'">
+        <input type="text" class="form-control" name="title" ng-model="article.title" required="">
+    </div>
+
+    <div class="controls" ng-if="item.type == 'number'">
+        <input type="number" class="form-control" name="title" ng-model="article.title" required="">
+    </div>
+
+    <div class="controls" ng-if="item.type == 'phone'">
+        <input type="text" class="form-control" name="title" ng-model="article.title" required="">
+    </div>
+
+    <div class="controls" ng-if="item.type == 'tel'">
+        <input type="text" class="form-control" name="title" ng-model="article.title" required="">
+    </div>
+
+    <div class="controls" ng-if="item.type == 'email'">
+        <input type="text" class="form-control" name="title" ng-model="article.title" required="">
+    </div>
+
+    <div class="controls" ng-if="item.type == 'textarea'">
+        <textarea class="form-control" name="title" ng-model="article.title" required=""></textarea>
+    </div>
+
+    <div class="controls" ng-if="item.type == 'editor'">
+        <div ui-tinymce="tinymceOptions" ng-model="article.content"></div>
+    </div>
+
+    <div class="controls clearfix" ng-if="item.type == 'images'">
+        <div class="wpg-edit-images" id="uploadImglist" ng-model="article._imglist" wpg-plupload="uploadOptions">
+        </div>
+    </div>
+
+</div>

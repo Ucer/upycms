@@ -1,0 +1,84 @@
+<div class="leftmenu-wrapper" wpgui-leftmenu>
+    <div class="leftmenu-body collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav leftmenu-nav" ng-show="!settingOpen && !wpgcmsOpen && !codingOpen && !resourceOpen">
+            <li ng-class="{'active':global.main_menu == 'graph'}"><a href="#/graph"><i class="fa fa-bar-chart fa-lg mrm"></i><span class="collapse_hide">统计数据</span></a></li>
+
+            <li ng-repeat="menu in menuList" ng-if="menu.status" ng-class="{'active':global.main_menu == 'app_{{ menu.code }}'}">
+                <a href="#/app/{{ menu.code }}"> <i class="fa fa-{{ menu.icon|default:'list'}} fa-lg mrm"></i><span class="collapse_hide">{{ menu.name }}</span></a>
+            </li>
+
+            <li ng-class="{'active':global.main_menu == 'resource'}">
+                <a href="javascript:;" ng-click="resourceOpen=!resourceOpen"> <i class="fa fa-chain fa-lg mrm"></i><span class="collapse_hide">资源管理</span></a>
+            </li>
+            <li ng-class="{'active':global.main_menu == 'setting'}">
+                <a href="javascript:;" ng-click="settingOpen=!settingOpen"> <i class="fa fa-wrench fa-lg mrm"></i><span class="collapse_hide">相关设置</span></a>
+            </li>
+            <li ng-class="{'active':global.main_menu == 'coding'}">
+                <a href="javascript:;" ng-click="codingOpen=!codingOpen"> <i class="fa fa-code fa-lg mrm"></i><span class="collapse_hide">开发者应用</span></a>
+            </li>
+        </ul>
+        
+        <!--相关设置-->
+        <ul class="nav navbar-nav leftmenu-nav" ng-show="settingOpen">
+            <li class="menu-return"><a href="javascript:;" ng-click="settingOpen=!settingOpen"><i class="fa fa-arrow-left fa-lg mrm"></i><span class="collapse_hide" style="margin-top: 5px;">返 回</span></a></li>
+            <li class="menu-mtitle">
+                <a href="javascript:;">
+                    <span class="collapse_hide">相关设置</span>
+                </a>
+            </li>
+            <li ng-class="{'active':global.main_menu == 'setting_site'}"><a href="#/setting"><i class="fa fa-home fa-lg mrm"></i><span class="collapse_hide">网站设置</span></a></li>
+            <li ng-class="{'active':global.main_menu == 'setting_theme'}">
+                <a href="#/setting/theme"> <i class="fa fa-file-powerpoint-o fa-lg mrm"></i><span class="collapse_hide">主题设置</span></a>
+            </li>
+
+            <li ng-class="{'active':global.main_menu == 'setting_fragment'}"><a href="#/setting/app/fragment"><i class="fa fa-code-fork fa-lg mrm"></i><span class="collapse_hide">碎片管理</span></a></li>
+            <li ng-class="{'active':global.main_menu == 'setting_position'}"><a href="#/setting/app/position"><i class="fa fa-hand-pointer-o fa-lg mrm"></i><span class="collapse_hide">推荐位管理</span></a></li>
+            <li ng-class="{'active':global.main_menu == 'setting_tagmgr'}"><a href="#/setting/app/tagmgr"><i class="fa fa-tag fa-lg mrm"></i><span class="collapse_hide">标签管理</span></a></li>
+            <li ng-class="{'active':global.main_menu == 'setting_category'}"><a href="#/setting/app/category"><i class="fa fa-th-list fa-lg mrm"></i><span class="collapse_hide">分类管理</span></a></li>
+            <li ng-class="{'active':global.main_menu == 'setting_upgrade'}" style="display: none;">
+                <a href="#/setting/upgrade"> <i class="fa fa-navicon fa-lg mrm"></i><span class="collapse_hide">TAG管理</span></a>
+            </li>
+        </ul>
+        
+        <!--资源管理-->
+        <ul class="nav navbar-nav leftmenu-nav" ng-show="resourceOpen">
+            <li class="menu-return"><a href="javascript:;" ng-click="resourceOpen=!resourceOpen"><i class="fa fa-arrow-left fa-lg mrm"></i><span class="collapse_hide" style="margin-top: 5px;">返 回</span></a></li>
+            <li class="menu-mtitle">
+                <a href="javascript:;">
+                    <span class="collapse_hide">资源管理</span>
+                </a>
+            </li>
+            <li ng-class="{'active':global.main_menu == 'imgmgr'}"><a href="#/imgmgr"><i class="fa fa-image fa-lg mrm"></i><span class="collapse_hide">图片管理</span></a></li>
+            <li ng-class="{'active':global.main_menu == 'video'}"><a href="#/video"><i class="fa fa-video-camera fa-lg mrm"></i><span class="collapse_hide">视频管理</span></a></li>
+            <li ng-class="{'active':global.main_menu == 'filemgr'}"><a href="#/filemgr"><i class="fa fa-file fa-lg mrm"></i><span class="collapse_hide">文件管理</span></a></li>
+        </ul>
+        
+        <!--开发者应用-->
+        <ul class="nav navbar-nav leftmenu-nav" ng-show="codingOpen">
+            <li class="menu-return"><a href="javascript:;" ng-click="codingOpen=!codingOpen"><i class="fa fa-arrow-left fa-lg mrm"></i><span class="collapse_hide" style="margin-top: 5px;">返 回</span></a></li>
+            <li class="menu-mtitle">
+                <a href="javascript:;">
+                    <span class="collapse_hide">开发者应用</span>
+                </a>
+            </li>
+            <li ng-class="{'active':global.main_menu == 'coding_appmgr'}">
+                <a href="#/coding/appmgr"> <i class="fa fa-th-large fa-lg mrm"></i><span class="collapse_hide">应用管理</span></a>
+            </li>
+            <li ng-class="{'active':global.main_menu == 'coding_navigation'}">
+            <a href="#/coding/navigation"> <i class="fa fa-navicon fa-lg mrm"></i><span class="collapse_hide">导航管理</span></a>
+            </li>
+            <li ng-class="{'active':global.main_menu == 'coding_filemgr'}"><a href="#/coding/filemgr"><i class="fa fa-folder fa-lg mrm"></i><span class="collapse_hide">空间管理</span></a></li>
+        </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+    <div class="hr_black"></div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav leftmenu-footer">
+            <li class="collapse_hide" ng-if="user.id==user.school.created_user"> <a href="javascript:;" ng-click="settingOpen=!settingOpen" title="系统设置" tooltip-placement="top" tooltip="系统设置"><i class="fa fa-cogs"></i></a></li>
+            <li class="collapse_hide" ng-if="user.id==user.school.created_user"><a href="#/settings/category/" title="分类管理" tooltip-placement="top" tooltip="分类管理"><i class="fa fa-sitemap"></i></a></li>
+            <li>
+                <a href="javascript:;" tooltip-placement="top" tooltip="折叠" class="toggle-page-menu"> <i class="fa fa-step-backward"></i> </a>
+            </li>
+        </ul>
+    </div>
+</div>

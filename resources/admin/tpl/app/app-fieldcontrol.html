@@ -1,0 +1,78 @@
+<div class="form-ctrl-{{ field.type }} clearfix">
+    <input ng-if="field.type == 'text'" type="text" class="form-control {{ field.config.size }}" name="{{ field.field }}" ng-model="field.value" wpg-validator="{{ field.validationRules }}">
+
+    <input ng-if="field.type == 'number'" type="number" class="form-control {{ field.config.size }}" name="{{ field.field }}" ng-model="field.value" wpg-validator="{{ field.validationRules }}" wpg-trim>
+
+    <div class="input-group {{ field.config.size }}" ng-if="field.type == 'mobile' || field.type == 'phone' || field.type == 'email'">
+        <span class="input-group-addon" ng-if="field.type == 'mobile' || field.type == 'phone'"><i class="fa fa-{{ field.type }}"></i></span>
+        <span class="input-group-addon" ng-if="field.type == 'email'"><i class="fa fa-mail-forward"></i></span>
+        <input type="text" class="form-control" name="{{ field.field }}" ng-model="field.value" wpg-validator="{{ field.validationRules }}" wpg-trim>
+    </div>
+
+    <div class="input-group {{ field.config.size }}" ng-if="field.type == 'price'">
+        <span class="input-group-addon">￥</span>
+        <input type="number" class="form-control" name="{{ field.field }}" ng-model="field.value" wpg-validator="{{ field.validationRules }}" wpg-trim>
+        <span class="input-group-addon">元</span>
+    </div>
+
+    <div ng-if="field.type == 'radio'" type="radio" class="{{ field.config.size }}" name="{{ field.field }}" ng-model="field.value">
+        <label class="radio-inline mrl" ng-repeat="opt in field.config.options">
+            <input type="radio" name="post" value="{{ opt.value }}" ng-model="fieldData.post" ng-checked="fieldData.post" wpg-icheck> {{ opt.label }}
+        </label>
+    </div>
+
+    <div ng-if="field.type == 'checkbox'" type="checkbox" name="{{ field.field }}" ng-model="field.value">
+        <label class="checkbox-inline mrl" ng-repeat="opt in field.config.options">
+            <input type="checkbox" name="sticky" ng-model="fieldData.post" ng-checked="fieldData.post==opt.value" wpg-icheck> {{ opt.label }}
+        </label>
+    </div>
+
+    <select ng-if="field.type == 'select'" type="text" class="form-control {{ field.config.size }}" name="{{ field.field }}" ng-model="field.value" wpg-validator="{{ field.validationRules }}">
+        <option>--请选择{{ field.name }}--</option>
+        <option ng-repeat="opt in field.config.options" value="{{ opt.value }}">{{ opt.name }}</option>
+    </select>
+
+    <textarea ng-if="field.type == 'textarea'" class="form-control {{ field.config.size }}" name="{{ field.field }}" ng-model="field.value" rows="{{ field.config.height }}" wpg-validator="{{ field.validationRules }}">
+    </textarea>
+
+    <div ng-if="field.type == 'editor'" ui-tinymce="tinymceOptions" ng-model="field.value" wpg-validator="{{ field.validationRules }}">
+    </div>
+
+    <div ng-if="field.type == 'image'" class="wpg-edit-images clearfix" ng-model="field.value" wpg-imgupload="iamgeUploadOptions" wpg-validator="{{ field.validationRules }}">
+    </div>
+
+    <div ng-if="field.type == 'images'" class="wpg-edit-images clearfix" ng-model="field.value" multiple="multiple" wpg-imgupload="imglistUploadOptions" wpg-validator="{{ field.validationRules }}">
+    </div>
+
+    <div ng-if="field.type == 'video'" class="clearfix" ng-model="field.value" wpg-video="upload">
+    </div>
+
+    <div ng-if="field.type == 'date'" class="input-group">
+        <input type="text" class="form-control {{ field.config.size }}" ng-model="field.value" bs-datepicker wpg-validator="{{ field.validationRules }}" wpg-trim>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+
+    <div ng-if="field.type == 'time'" class="input-group">
+        <input type="text" class="form-control" ng-model="field.value" data-autoclose="true" wpg-clockpicker wpg-validator="{{ field.validationRules }}" wpg-trim>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+        </span>
+    </div>
+
+    <div ng-if="field.type == 'datetime'" ng-model="field.value" wpg-datetimepicker></div>
+
+    <input ng-if="field.type == 'color'" type="hidden" ng-model="field.value" class="form-control input-mg" wpg-colorpicker />
+
+    <div ng-if="field.type == 'amap'" class="clearfix" ng-model="field.value" wpg-map>
+    </div>
+
+    <select ng-if="field.type == 'category'" class="form-control {{ field.config.size }}" name="category_id" ng-model="field.value" wpg-validator="{{ field.validationRules }}">
+        <option>
+        --请选择{{ field.name }}--
+        </option>
+        <option ng-repeat="item in field.options" value="{{ item.id }}" ng-bind-html="item.name">
+        </option>
+    </select>
+</div>

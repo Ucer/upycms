@@ -1,5 +1,4 @@
-var srcDir = 'src',
-    sourceDir = 'resources';
+var sourceDir = 'resources';
 destDir = 'web/static/dist';
 
 
@@ -77,14 +76,50 @@ upyConf.src = {
 };
 
 
+// admin 配置
+var adminConf = {
+    name: 'admin',
+    filename: 'admin',
+    dir: sourceDir + '/admin', //源目录
+    src: {},
+    dest: destDir + '/admin' // 目标目录
+};
+adminConf.src = {
+    img: [
+        adminConf.dir + '/img/*.*'
+    ],
+    css: [
+        adminConf.dir + '/css/*.css',
+        'libs/bootstrap-plugin/bootstrap-additions/0.3.1/bootstrap-additions.min.css',
+        'libs/jquery-plugin/clockpicker/0.0.7/bootstrap-clockpicker.min.css',
+        'libs/jquery-plugin/spectrum/1.8.0/spectrum.css',
+        'libs/videojs/5.4.4/video-js.min.css',
+        '!' + adminConf.dir + '/css/*.min.css',
+        '!' + adminConf.dir + '/css/login.css'
+    ],
+    js: [
+        adminConf.dir + '/js/*.js',
+        adminConf.dir + '/js/*/*.js',
+        adminConf.dir + '/js/*/*/*.js',
+        adminConf.dir + '/js/*/*/*/*.js',
+    ],
+    tpl: [
+        adminConf.dir + '/tpl/*.{html,tpl,tpl.html}',
+        adminConf.dir + '/tpl/*/*.{html,tpl,tpl.html}',
+        adminConf.dir + '/tpl/*/*/*.{html,tpl,tpl.html}',
+        adminConf.dir + '/tpl/*/*/*/*.{html,tpl,tpl.html}',
+    ],
+
+
+};
+
 
 
 
 //全部配置
 var config = {
     upy: upyConf,
-    // upyall: upyAllConf,
-    // admin: adminConf,
+    admin: adminConf,
 };
 
 module.exports = config;

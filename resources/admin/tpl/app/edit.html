@@ -1,0 +1,19 @@
+<div class="contentpanel-layout" wpg-page="pageConfig.pagecode">
+    <div class="contentview-layout footer_in appdata-form-container">
+        <div class="contentview-main appdata-form-main" ng-class="{'sidebar_in': !$app.metacontrol}">
+            <div class="contentview-header">
+                <div ng-include="templateUrl.pageheader"></div>
+            </div>
+            <div class="contentview-body">
+                <div class="col-md-12" ng-include="templateUrl.maincontrol">
+                </div>
+            </div>
+        </div>
+        <div ng-if="$app.metacontrol" class="contentview-sidebar appdata-form-sidebar">
+            <div class="contentview-sidebar-header">{{ $app.name }}设置</div>
+            <div class="contentview-sidebar-body">
+                <div ng-include="templateUrl.metacontrol"></div>
+            </div>
+        </div>
+    </div>
+</div>

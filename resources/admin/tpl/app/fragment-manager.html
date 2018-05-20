@@ -1,0 +1,50 @@
+<div class="contentpanel-layout">
+    <div class="contentview-layout">
+        <div class="contentview-main sidebar_in">
+            <div class="contentview-header">
+                <div class="title pull-left">
+                    <h3 style="margin-top: 0px;"><i class="fa fa-code-fork"></i> 碎片管理</h3>
+                </div>
+                <span class="badge mlm pull-left data-count" style="display:none; font-size: 18px;"></span>
+                <div class="pull-right form-group">
+                    <button class="btn btn-danger pull-left mrl" ng-click="js_fragment_create()">
+                        <i class="glyphicon glyphicon-plus"></i> 新增碎片
+                    </button>
+                </div>
+            </div>
+            <div class="contentview-body">
+                <div class="table-responsive">
+                    <table class="table table-hover data-table">
+                        <thead>
+                            <tr>
+                                <th>编号ID</th>
+                                <th>名称</th>
+                                <th>标识</th>
+                                <th style="width: 100px;">状态</th>
+                                <th style="width: 180px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in allItems" data-role="item" class="fade-remove">
+                                <td ng-bind="item.id"></td>
+                                <td ng-bind="item.name"></td>
+                                <td ng-bind="item.code"></td>
+                                <td>
+                                    <span class="label label-success" ng-if="item.status">正常</span>
+                                    <span class="label label-danger" ng-if="!item.status">禁用</span>
+                                </td>
+                                <td>
+                                    <a href="javascript:;" class="btn btn-default btn-sm" ng-click="js_fragment_update(item)">编辑</a>
+                                    <a href="javascript:;" class="btn btn-default btn-sm" ng-click="js_fragment_delete(item)">
+                                        <span class="text-danger">删除</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
