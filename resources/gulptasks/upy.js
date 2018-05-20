@@ -190,9 +190,9 @@ gulp.task('compress-upy-css', function() {
 
 gulp.task('compress-upy', function () {
     console.log('running compress-upy  ==========================================  ');
-    // gulp.start('compress-upy-core');
-    // gulp.start('compress-upy-bench');
-    // gulp.start('compress-upy-all');
+    gulp.start('compress-upy-core');
+    gulp.start('compress-upy-bench');
+    gulp.start('compress-upy-all');
     gulp.start('compress-upy-css');
 
 });
