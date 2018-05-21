@@ -79,7 +79,7 @@ upyConf.src = {
 // admin 配置
 var adminConf = {
     name: 'admin',
-    filename: 'admin',
+    filename: 'all',
     dir: sourceDir + '/src/admin', //源目录
     src: {},
     dest: destDir + '/admin' // 目标目录

@@ -4,10 +4,10 @@
  * 定义应用的路由
  */
 
-angular.module('wpg.config', ['ui.router'])
+angular.module('upy.config', ['ui.router'])
 
     .config(function($stateProvider, $urlRouterProvider) {
-        var distTpl = window.WPGAdminConf.distTpl;
+        var distTpl = window.UPYAdminConf.distTpl;
 
         // $stateProvider
         // .state('wpg_demo_index', {
