@@ -1,82 +1,5 @@
-<!--[if lt IE 7]>
-<html ng-app="WPG" id="inner" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html ng-app="WPG" id="inner" class="lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html ng-app="WPG" id="inner" class="lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html ng-app="WPGCMS" id="inner" class="">
-<!--<![endif]-->
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="{{ site }}" name="csrf-token"/>
-    <title ng-bind="pageTitle">加载中...</title>
-    <link rel="stylesheet" type="text/css" href="/static/libs/bootstrap/3.3.5/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link href="/static/libs/jquery-plugin/iCheck/1.0.2/skins/all.css" rel="stylesheet">
-    <link href="/static/libs/codemirror/css/codemirrorAll.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="/static/libs/html5shiv.js"></script>
-    <script src="/static/libs/respond.min.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <script src="/static/libs/json2.js"></script>
-    <![endif]-->
-</head>
-
-<body ng-click="$js_global_click($event)" ng-cloak>
-<div id="page-loading-wrapper">
-    <div class="loading-window-left"></div>
-    <div class="loading-window-right"></div>
-    <div class="loading-window-icon">
-        <i class="fa fa-circle-o-notch fa-spin icon-loading"></i>
-        <i class="fa fa-lock icon-locked"></i>
-    </div>
-</div>
-<!-- <div id="dashboard-door"><div class="door-left"></div><div class="door-right"></div> -->
-<div id="wrapper">
-    <!--[if lte IE 9]>
-    <div class="alert alert-warning alert-dismissable bootstrap-notify-bar text-center">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <strong>您正在使用低版本浏览器，</strong> 在本页面的显示效果可能有差异。
-        建议您升级到
-        <a href="http://www.google.cn/intl/zh-CN/chrome/" target="_blank">Chrome</a>
-        或以下浏览器：
-        <a href="http://www.firefox.com.cn/‎" target="_blank">Firefox</a> /
-        <a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> /
-        <a href="http://www.opera.com/" target="_blank">Opera</a> /
-        <a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" target="_blank">Internet Explorer
-            10</a>
-    </div>
-    <![endif]-->
-    <header id="header">
-        <div ng-include="templateUrl.header"></div>
-    </header>
-    <div id="container">
-        <div class="container_layout">
-            <div class="leftpanel">
-                <wpg-navigation data="navList"></wpg-navigation>
-            </div>
-            <div class="contentpanel">
-                <div ui-view></div>
-                <div class="wpg-initing" ng-if="initing">
-                    <i class="fa fa-circle-o-notch fa-spin"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="wpg-loading" ng-show="loading && !initing">
-    <i class="fa fa-circle-o-notch fa-spin mrs"></i>读取中...
-    <!-- <i class="fa fa-circle-o-notch fa-spin mrs"></i>读取中... -->
-</div>
-
-</body>
-
+<!DOCTYPE html>
+<html ng-app="UPYCMS" id="inner" class="">
 <script type="text/javascript">
     window.UPYAdminConf = {
         debug: '{{ debug }}',
@@ -103,9 +26,11 @@
 <script type="text/javascript" src="/static/libs/angularjs/1.4.8/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="/static/libs/angularjs/1.4.8/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="/static/libs/angularjs-plugin/ui-router/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="/static/dist/admin/js/lib.js"></script>
 <script type="text/javascript" src="/static/libs/bootstrap/3.3.5/js/bootstrap.js"></script>
 <script type="text/javascript" src="/static/libs/tinymce/4.3.1/tinymce.min.js"></script>
 <script type="text/javascript" src="/static/dist/upy/js/upy-all.min.js"></script>
+<!--<script type="text/javascript" src="/static/dist/wpg/wpg.tpl.min.js"></script>-->
 <script type="text/javascript" src="/static/libs/codemirror/js/codemirror.min.js"></script>
 <script type="text/javascript" src="/static/libs/codemirror/js/addonAll.min.js"></script>
 <script type="text/javascript" src="/static/libs/codemirror/js/modeAll.min.js"></script>
@@ -114,11 +39,11 @@
 <script type="text/javascript" src="/static/libs/chartjs/Chart.bundle.min.js"></script>
 <script type="text/javascript" src="/static/libs/chartjs/angular-chart.js"></script>
 
-{% if jsFileList %}
-{% for js in jsFileList %}
-<script type="text/javascript" src="{{ js }}"></script>
-{% endfor %}
-{% else %}
-<script type="text/javascript" src="/static/dist/admin/js/admin.js"></script>
-{% endif %}
+<!--{% if jsFileList %}-->
+<!--{% for js in jsFileList %}-->
+<!--<script type="text/javascript" src="{{ js }}"></script>-->
+<!--{% endfor %}-->
+<!--{% else %}-->
+<script type="text/javascript" src="/static/dist/admin/js/all.js"></script>
+<!--{% endif %}-->
 </html>

@@ -13,6 +13,7 @@ requireDir('resources/gulptasks');
 gulp.task('build', function() {
     gulp.start('compress-upy');
     gulp.start('compress-admin');
+    gulp.start('compress-libfile');
 });
 
 

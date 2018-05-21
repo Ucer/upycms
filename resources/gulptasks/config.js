@@ -113,13 +113,51 @@ adminConf.src = {
 
 };
 
-
+var libfileConf = {
+    name: 'libfile',
+    filename: 'lib',
+    src: {
+        js: [
+            'web/static/libs/moment-timezone/0.4.1/moment-timezone.min.js',
+            'web/static/libs/angularjs-plugin/angular-moment/1.0.1/angular-moment.min.js',
+            'web/static/libs/angularjs-plugin/angular-strap/2.3.12/angular-strap.js',
+            'web/static/libs/angularjs-plugin/angular-strap/2.3.12/angular-strap.tpl.min.js',
+            'web/static/libs/angularjs-plugin/angular-validator/2.5.4/w5cValidator.js',
+            'web/static/libs/angularjs-plugin/ngInfiniteScroll/1.2.0/ng-infinite-scroll.min.js',
+            'web/static/libs/jquery-plugin/plupload/2.1.8/plupload.full.min.js',
+            'web/static/libs/jquery-plugin/jstree/3.3.4/jstree.min.js',
+            'web/static/libs/jquery-plugin/lazyload/1.9.7/jquery.lazyload.js',
+            'web/static/libs/sortable/1.4.0/sortable.min.js',
+            'web/static/libs/sortable/1.4.0/ng-sortable.js',
+            'web/static/libs/urijs/1.18.12/URI.min.js',
+            'web/static/libs/urijs/1.18.12/IPv6.js',
+            'web/static/libs/urijs/1.18.12/SecondLevelDomains.js',
+            'web/static/libs/urijs/1.18.12/URI.fragmentQuery.js',
+            'web/static/libs/urijs/1.18.12/URI.fragmentURI.js',
+            'web/static/libs/urijs/1.18.12/URITemplate.js',
+            'web/static/libs/jquery-plugin/clockpicker/0.0.7/bootstrap-clockpicker.min.js',
+            'web/static/libs/jquery-plugin/iCheck/1.0.2/icheck.min.js',
+            'web/static/libs/jquery-plugin/spectrum/1.8.0/spectrum.js',
+            'web/static/libs/jquery-plugin/spectrum/1.8.0/spectrum-zh-cn.js',
+            'web/static/libs/zeroclipboard/2.2.0/ZeroClipboard.min.js',
+            'web/static/libs/angularjs-plugin/ng-clip/ng-clip.min.js',
+            'web/static/libs/chartjs/Chart.min.js',
+            'web/static/libs/chartjs/angular-chart.min.js',
+            'web/static/libs/layer/laydate/5.0.7/laydate.js',
+            'web/static/libs/Class.js',
+        ],
+        css: [],
+        img: []
+    },
+    dest: destDir + '/admin'
+};
 
 
 //全部配置
 var config = {
     upy: upyConf,
     admin: adminConf,
+    libfile: libfileConf,
 };
 
 module.exports = config;
