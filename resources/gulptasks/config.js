@@ -118,6 +118,9 @@ var libfileConf = {
     filename: 'lib',
     src: {
         js: [
+            'web/static/libs/lodash/3.10.1/lodash.min.js',
+            'web/static/libs/moment/2.18.1/moment.min.js',
+            'web/static/libs/moment/2.18.1/locale/zh-cn.js',
             'web/static/libs/moment-timezone/0.4.1/moment-timezone.min.js',
             'web/static/libs/angularjs-plugin/angular-moment/1.0.1/angular-moment.min.js',
             'web/static/libs/angularjs-plugin/angular-strap/2.3.12/angular-strap.js',

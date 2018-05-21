@@ -7,7 +7,7 @@
 
 
 'use strict';
-
 angular.module("upy.bench", [
+    'ngClipboard',
     'upy.bench.config.url',
-]);
+])

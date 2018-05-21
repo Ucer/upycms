@@ -9,5 +9,4 @@
 'use strict';
 
 angular.module("upy.core", [
-    'upy.unit',
 ]);

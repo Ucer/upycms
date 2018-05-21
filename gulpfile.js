@@ -13,7 +13,7 @@ requireDir('resources/gulptasks');
 gulp.task('build', function() {
     gulp.start('compress-upy');
     gulp.start('compress-admin');
-    gulp.start('compress-libfile');
+    // gulp.start('compress-libfile'); // 测试环境为了测试临时注释
 });
 
 
